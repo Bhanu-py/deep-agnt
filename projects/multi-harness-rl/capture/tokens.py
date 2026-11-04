@@ -15,3 +15,12 @@ def tokenize(text, vocab):
             ids.append(vocab["<unk>"])
             i += 1
     return ids
+
+
+
+def detokenize(ids, vocab):
+    inv = {v: k for k, v in vocab.items()}
+    for i in ids:
+        if i not in inv:
+            raise KeyError(f"unknown token id {i}")
+    return ''.join(inv[i] for i in ids)
