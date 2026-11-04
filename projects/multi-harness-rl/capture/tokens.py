@@ -24,3 +24,8 @@ def detokenize(ids, vocab):
         if i not in inv:
             raise KeyError(f"unknown token id {i}")
     return ''.join(inv[i] for i in ids)
+
+
+def drifts(ids, vocab):
+    """True if detokenizing then re-tokenizing does not give back the same ids."""
+    return tokenize(detokenize(ids, vocab), vocab) != list(ids)
